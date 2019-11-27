@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /*  
 Name: ClientControl Class
 
-Written By: Denzel Awuah - October 2019
+
 
 Purpose: performs operations on packets from the client that are sent to the server.
 
@@ -46,8 +46,7 @@ public class ClientControl implements Runnable{
 	
 	/*  
 	  Name:	getNameList
-	  
-	  Written By: Denzel Awuah - October 2019
+
 	  
 	  Purpose: getting the name of the client that has connected and also getting the arraylist full of the names of all clients 
 	  connected to the server
@@ -67,7 +66,7 @@ public class ClientControl implements Runnable{
 	/*  
 	  Name:	WelcomeMessage
 	  
-	  Written By: Denzel Awuah - October 2019
+
 	  
 	  Purpose: When a new client connects to the server, broadcast message is sent to all connected clients informing them of the new client
 	  
@@ -87,7 +86,6 @@ public class ClientControl implements Runnable{
 	/*  
 	  Name:	LeavingMessage
 	  
-	  Written By: Denzel Awuah - October 2019
 	  
 	  Purpose: When a client disconnects from the server, a broadcast message is sent to all connected clients, informing them
 	  of the disconnection with the client
@@ -110,8 +108,7 @@ public class ClientControl implements Runnable{
 	
 	/*  
 	  Name:	run()
-	  
-	  Written By: Denzel Awuah - October 2019
+
 	  
 	  Purpose: The Server handling the messages that it received from the client, and sending back acknowledgement or error messages if needed. 
 	  
@@ -141,7 +138,7 @@ public class ClientControl implements Runnable{
 			
 			
 			 
-			if (msgin.substring(0,4).equals("list")) {               //checks if the client entered "list"  (keyword which returns a list of usernames of all connected clients)
+			if (msgin.substring(0,3).equals("list")) {               //checks if the client entered "list"  (keyword which returns a list of usernames of all connected clients)
 				dout.println(clientUsernames);                       //prints out a list of all clients usernames
 				dout.flush();
 			
@@ -209,8 +206,6 @@ public class ClientControl implements Runnable{
 	/*  
 	  Name:	Checksum()
 	  
-	  Written By: Denzel Awuah - October 2019
-	  
 	  Purpose: Evaluates the checksum of each message that is sent from the client, to see if there are any errors
 	  
 	  Usage: Calculate the sum of all the characters ascii values contained in the message sent. If the results are the same, then
@@ -237,8 +232,6 @@ public class ClientControl implements Runnable{
 
 	/*  
 	  Name:	getClients and setClients
-	  
-	  Written By: Denzel Awuah - October 2019
 	  
 	  Purpose: getter and setter functions for the arraylist containing the clients sockets
 	  

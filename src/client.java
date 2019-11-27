@@ -7,13 +7,13 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 
-public class client extends server {
+public class client {//extends server {//not sure why client extends server, but it does not need to, so I am removing this to stay sane
 
 	 
 	/*  
 	  Name:	Main Method
 	  
-	  Written By: Denzel Awuah - October 2019
+	 
 	  
 	  Purpose: Start the client program and allow it to search and connect to the desired server. Also allow for comminication with other 
 	  clients on the server
@@ -27,8 +27,8 @@ public class client extends server {
 	 */
 	public static void main(String[] args) {
 
-		ArrayList<String> usernames = new ArrayList<String>();
-		ArrayList<ClientControl> clients = new ArrayList<ClientControl>();  //List of clients 
+		//ArrayList<String> usernames = new ArrayList<String>();
+		//ArrayList<ClientControl> clients = new ArrayList<ClientControl>();  //List of clients 
 
 		try {
 			
@@ -36,6 +36,8 @@ public class client extends server {
 			
 			 
 			ServerControl servControl = new ServerControl(s); //Used to control clients messages to Server
+			servControl.key="this is your aes key, dont tell anyone";
+			servControl.encrypt=false;
 			PrintWriter dout = new PrintWriter(s.getOutputStream());  //for reading output stream
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); //for getting users input
@@ -52,7 +54,7 @@ public class client extends server {
 			/*  
 			  Name:	While loop
 			  
-			  Written By: Denzel Awuah - October 2019
+		
 			  
 			  Purpose: Allow the client to send and receieve messages to other clients connected to the server
 			  
@@ -65,14 +67,33 @@ public class client extends server {
 			  Buffered Reader - used to read in user input to send to the server
 			 
 			 */
+			
 			while(true) {
 				
 				System.out.println("\nMessage Format-(Username:Message)");
 				msgout = br.readLine(); 				//clients msg to server
 				if(msgout.equals("bye")) break; 		//if the client types in bye, exit the loop and disconnect from server
-				
-				
-				
+				if(msgout.equals("encrypt")){
+					servControl.encrypt^=true;//this takes the precious encryption state and xors it with true causing it to flip to the oposit
+					continue;//skip messaging server this time
+				}
+				if(servControl.encrypt){
+					String target;
+					String msg;
+					if(msgout.indexOf(":")<0){//badly formed message (or some sort of command) encrypt and send anyway
+
+						target="";
+						msg=msgout;
+		
+					}else{
+						target=msgout.substring(0,msgout.indexOf(":")+1);//split message into sender and message1
+						msg=msgout.substring(msgout.indexOf(":")+1,msgout.length());
+					}
+					msg=AES.encrypt(msg,servControl.key);//encrypt just the message
+					
+					//if you dont want to do aes her you can apply ROT instead by making a ROT.encrypt function
+					msgout=target+msg;//rebuild the message packet, remember wew didnt encrypt target or the server wouldnt know who to send it to
+				}//everything else as normal
 				int checksum = Checksum(msgout);
 				
 				
@@ -98,7 +119,7 @@ public class client extends server {
 	/*  
 	  Name:	Checksum
 	  
-	  Written By: Denzel Awuah - November 2019
+	
 	  
 	  Purpose: Performs a function on the message entered by the client to create a checksum for this message
 	  

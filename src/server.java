@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 /*  
 	  Name:	Server Class
 	  
-	  Written By: Denzel Awuah - October 2019
+	
 	  
 	  Purpose: Start the server so that it is able to establish Client connections (maximum of 5 clients)]
 	  
