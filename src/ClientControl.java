@@ -138,7 +138,7 @@ public class ClientControl implements Runnable{
 			
 			
 			 
-			if (msgin.substring(0,3).equals("list")) {               //checks if the client entered "list"  (keyword which returns a list of usernames of all connected clients)
+			if (msgin.substring(0,4).equals("list")) {               //checks if the client entered "list"  (keyword which returns a list of usernames of all connected clients)
 				dout.println(clientUsernames);                       //prints out a list of all clients usernames
 				dout.flush();
 			

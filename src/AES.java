@@ -1,8 +1,4 @@
-//I wanted to have a crazy level of encryption, so I just went with AES 128 bit
-//I found this class here https://howtodoinjava.com/security/java-aes-encryption-example/
-//I have no idea how it works (ok I do, but I couldnt write it on my own) but the important thing is you can call
-//AES.encrypt(originalString,key); to encrypt a string
-//AES.decrypt(encryptedString,key); to decrypt a string
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +8,26 @@ import java.util.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+
+
+/*  
+ 
+Name: AES Class
+
+
+Purpose: uses AES 128 bit encryption to encrypt and decrypt messages sent from clients 
+
+Usage: When a client enters "encrypt" , this turns on encryption, and allows for all their messages to be encrypted when sent. 
+
+Subroutines/libraries required:
+java.io.UnsupportedEncodingException
+java.security.MessageDigest
+java.security.NoSuchAlgorithmException
+javax.crypto.Cipher
+
+Reference: https://howtodoinjava.com/security/java-aes-encryption-example/
+
+*/
 
 public class AES {
  
@@ -36,6 +52,17 @@ public class AES {
         }
     }
   
+    
+	/*  
+	  Name:	encrypt
+	  
+	  Purpose: Encrypts a a string 
+	  
+	  Usage: Used to Encrypt a clients message before sending.
+	  
+	  Subroutines/libraries required:
+
+	 */
     public static String encrypt(String strToEncrypt, String secret) 
     {
         try
@@ -52,6 +79,18 @@ public class AES {
         return null;
     }
   
+    
+    
+	/*  
+	  Name:	decrypt
+	  
+	  Purpose: Decrypts a a string 
+	  
+	  Usage: Used to decrypt encrypted messages from clients.
+	  
+	  Subroutines/libraries required:
+
+	 */
     public static String decrypt(String strToDecrypt, String secret) 
     {
 		

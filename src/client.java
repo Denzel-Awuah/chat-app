@@ -7,14 +7,13 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 
-public class client {//extends server {//not sure why client extends server, but it does not need to, so I am removing this to stay sane
+public class client {
 
 	 
 	/*  
 	  Name:	Main Method
 	  
 	 
-	  
 	  Purpose: Start the client program and allow it to search and connect to the desired server. Also allow for comminication with other 
 	  clients on the server
 	  
